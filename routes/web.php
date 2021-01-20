@@ -80,3 +80,5 @@ Route::get('/controllerPosts/{id}','PostsResourceController@create');
 */
 
 Route::resource('/resourcepost','PostsResourceController');
+
+Route::get('/contact','PostResourceController@contact');
