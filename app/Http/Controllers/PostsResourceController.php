@@ -87,6 +87,7 @@ class PostsResourceController extends Controller
     public function contact(){
 
         return view('contact');
+<<<<<<< HEAD
     }
 
     public function show_post($id,$name){
@@ -95,4 +96,9 @@ class PostsResourceController extends Controller
 
         return view('posts',compact('id','name'));
     }
+=======
+    
+    }
+
+>>>>>>> 33e59d67c714e5f1d79726a7a56ab16ffa6db446
 }
