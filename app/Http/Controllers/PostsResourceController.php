@@ -83,4 +83,16 @@ class PostsResourceController extends Controller
     {
         //
     }
+
+    public function contact(){
+
+        return view('contact');
+    }
+
+    public function show_post($id,$name){
+
+        // return view('posts')->with('id',$id)->with('name',$name);
+
+        return view('posts',compact('id','name'));
+    }
 }

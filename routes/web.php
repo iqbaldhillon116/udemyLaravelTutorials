@@ -80,3 +80,15 @@ Route::get('/controllerPosts/{id}','PostsResourceController@create');
 */
 
 Route::resource('/resourcepost','PostsResourceController');
+
+
+/*------------------------------------
+*section 6 :fundamentals of views
+--------------------------------------
+*/
+
+Route::get('/contact','PostsResourceController@contact');
+
+//passing data in views
+
+Route::get('/posts/{id}/{name}','PostsResourceController@show_post');
