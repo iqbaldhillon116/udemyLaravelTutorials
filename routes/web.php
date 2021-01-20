@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/',function(){
+return view('welcome');
+});
+
 Route::get('/admin', function () {
     // return view('welcome');
     return "admin is here";
@@ -44,3 +48,35 @@ Route::get('users/posts',array( 'as'=>'users.home' ,function(){
 
 }));
 
+
+/*-----------
+To make controller
+------------
+=> php artisan make:controller PostController
+
+---------------------
+*To make resource controller
+--------------------
+=> php artisan make:controller --resource PostsController
+
+----------------------
+*/
+
+
+//--------------------------------------------------------------------------
+//Routing Controllers (lecture 23)
+// --------------------------------------------------------------------------
+
+Route::get('/controllerPosts','PostsResourceController@index');
+
+Route::get('/controllerPosts/{id}','PostsResourceController@create');
+
+/* -------------------------------------------------------
+* Using Resource routes in controller
+* we can get access to all routes details by writing the following artisan command
+=> php artisan route:list
+*
+----------------------------------------------
+*/
+
+Route::resource('/resourcepost','PostsResourceController');
