@@ -81,8 +81,6 @@ Route::get('/controllerPosts/{id}','PostsResourceController@create');
 
 Route::resource('/resourcepost','PostsResourceController');
 
-<<<<<<< HEAD
-
 /*------------------------------------
 *section 6 :fundamentals of views
 --------------------------------------
@@ -93,6 +91,6 @@ Route::get('/contact','PostsResourceController@contact');
 //passing data in views
 
 Route::get('/posts/{id}/{name}','PostsResourceController@show_post');
-=======
-Route::get('/contact','PostResourceController@contact');
->>>>>>> 33e59d67c714e5f1d79726a7a56ab16ffa6db446
+
+
+
