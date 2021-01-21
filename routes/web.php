@@ -93,4 +93,11 @@ Route::get('/contact','PostsResourceController@contact');
 Route::get('/posts/{id}/{name}','PostsResourceController@show_post');
 
 
+/*-------------------------------
+* section 7 : hot to use blade templating engine in laravel
+-------------------------------
+*/
 
+Route::get('/rollno','PostsResourceController@roll_no');
+
+Route::get('/class/{id}','PostsResourceController@class');

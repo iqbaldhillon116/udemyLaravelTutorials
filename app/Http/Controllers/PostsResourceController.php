@@ -97,6 +97,16 @@ class PostsResourceController extends Controller
         return view('posts',compact('id','name'));
     }
 
-    
+    public function roll_no(){
+//here we are passing an array in view 
+//in this view we have used the foreach loop with blade template .check it out
+        $students = ['iqbal' , 'amrit' ,'vishal' , ' kartik'];
+        return view('layouts.rollno', compact('students'));
+    }
+
+    public function class($id){
+
+        return view('layouts.class',compact('id'));
+    }
 }
 
