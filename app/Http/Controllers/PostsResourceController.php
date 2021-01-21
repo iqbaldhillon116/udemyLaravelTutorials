@@ -98,6 +98,5 @@ class PostsResourceController extends Controller
     }
 
     
-    }
-
 }
+
