@@ -1,0 +1,61 @@
+Q.How to use migrations?
+
+Ans.)*Create database
+
+     *Add the database info in .env file
+
+     *use php artisan migrate command to migrate all the new tables and columns into that database
+
+
+
+Q.)How to use uri's with resource routes?
+
+  *first of all we can get access to all details of routes by writing the command in cmd "php artisan route:list"
+
+  *than we can use uri conventions to access all functions
+
+  *for example to use create method we can write "/posts/create" in uri to access the create method of  controller
+
+
+====================================================
+Commands
+====================
+NOTE:To see all commands provided by php artisan we can write the following command in cmd,
+
+=>php artisan
+
+1.)How to create migration ?
+ => php artisan make:migration create_post_table -- create="posts"
+
+ 1.1)How to add column  to existed table structure with migrations?
+    =>php artisan make:migration add_is_admin_column_to_posts_table  --table="posts"
+
+    --table flag is used to point to the table in which we want to add new column.here posts is exisiting table.
+
+2.)How to undo last migration?
+ => php artisan migrate:rollback
+  
+  2.1)How to remove all migrated tables from db ?
+    =>php artisan migrate:reset
+
+     command is used to rollback all migrated tables
+
+3.)How to migrate tables?
+ => php artisan migrate
+   
+  3.1)How to update new migrations content without rollback and migrate command?
+    =>php artisan migrate:refresh
+
+      command is used to migrate the updated migrations content
+
+4.)How to get all  routes list?
+ => php artisan route:list
+
+5.)How to create controller?
+ => php artisan make:controller PostController
+
+6.)How to make Crud controller or  resource controller?
+
+ => php artisan make:controller --resource PostsController
+
+
