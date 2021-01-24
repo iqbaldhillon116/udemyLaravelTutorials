@@ -1,0 +1,85 @@
+NOTE: To use Elquent Commands in laravel you first have to create model and then we can access all the aelquent properties to access database.
+We have defined the steps of how to create model in artisan commands.
+
+Q.How to read data from database with eloquent ?
+ 
+ firstly we have to add the namespace of model which we have creted and then we can access the properties.
+
+ use App\post;
+
+=> $result = Post::all();
+   to fetech all data.
+
+=> $result = Post::find(1);
+
+   here we are passing primary key id = 1 to get row  from table posts.
+
+Q. How to get data with constraints?
+
+=> $result = Post::where('id',1)->orderBy('id','desc')->take(1)->get();
+
+    this will return us an array of object.
+
+=> $result = Post::findorFail(1);
+   this function will either give you result if found or it will give you exception to handle instead of giving error.
+
+=> $result = Post::where('users_count' , '<' , 50)->firstorFail();
+   here we can note that where function can take three arguments to add much better constraints.
+
+Q. How to insert data with eloquent ?
+
+ firstly create an object of model in your funcition to access the table columns with it.
+
+=> $post = new Post;
+
+ now access columns and assign data to it.
+
+=> $post->title = 'new title' ;
+
+=> $post->content = 'this is content';
+ now use save method of model to insert the the above data.
+
+=> $post->save();
+
+Q. how to update data?
+
+we can use the above same method but with small change,instead of creating an object to save data , we have to find the row  whcih we want to update.
+
+ie. $post = Post::find(1);
+
+=> $post->title = 'new updation';
+=> $post->content = ' content updation';
+
+=> $post->save();
+
+Q. How to add data with create method ?
+
+we cannot insert data for multiple columns at once means in single line without declaring permission in model
+
+to insert multiple data we need to override the fillable property of model as follows,
+
+protected $fillable =  ['title','content','is_admin'];//here we are getting permission to save data in following columns
+
+now we can use create command
+
+=>post::create(['title'=>'Creating data from create command' , 'content' => 'creating content' , 'is_admin' => 1]);
+
+Q.How to update multiple columns?
+
+=>Post::where('id',2)->update(['title' => 'whatever you want' ,'content'=>'again whatever you want']);
+
+Q. How to delete data?
+
+there are two ways to delete the data
+
+first is by finding the row and then calling delete method and second is directly calling destroy method and passing the id through it.
+
+=>post::find(1);
+
+  post::delete();
+ 
+OR
+=>  post::destroy(1);
+
+
+

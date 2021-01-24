@@ -144,3 +144,117 @@ Route::get('/delete' , function(){
 
     return $deleted;
 });
+
+
+/*-------------------------------
+* section 10 : Eloquent
+-------------------------------
+*/
+
+use App\Post;
+
+Route::get('/find',function(){
+
+    $result = Post::all();
+
+    foreach($result as $posts){
+            echo $posts->title ."<br>";
+    }
+});
+
+Route::get('/findone',function(){
+
+    $result = Post::find(2);
+
+    return $result->title;
+    // foreach($result as $posts){
+    //         echo $posts->title ."<br>";
+    // }
+});
+
+
+Route::get('/findwhere' , function(){
+
+    $result = Post::where('id',2)->orderBy('id','desc')->take(1)->get();
+
+//  echo $result[0]->title;
+return $result;
+});
+
+Route::get('/findmore',function(){
+
+    $result = Post::findorFail(1);
+ //here if we pass wrong id that dose not exists then it will give exception instead of error.
+
+    $result2 = Post::where('users_count' , '<' , 50)->findorFail();
+
+    return $result;
+});
+
+/*===========
+| insert and update
+================*/
+
+Route::get('/basicinsert' , function(){
+
+    $post = new Post;
+
+    $post->title = 'Learning laravel eloquent';
+    $post->content = 'learning from the best teacher';
+    $post->is_admin = 1;
+
+    $post->save();
+
+});
+
+Route::get('/basicinsert2' , function(){
+//one way to update
+    $post = Post::find(4);//instead of creating the object , find the row
+
+    $post->title = 'Learning laravel eloquent 2';
+    $post->content = 'learning from the best teacher 2';
+    $post->is_admin = 1;
+
+    $post->save();
+
+});
+
+/*===========
+| using create method for inserting multiple column values and update 
+================*/
+
+Route::get('/create' , function(){
+
+    Post::create(['title'=>'hello world','content' => 'this is content with create command' ,'is_admin' =>1]);
+
+});
+
+Route::get('/update' , function(){
+
+    Post::where('id',2)->update(['title'=>'my life my rules','content' => 'another way to update']);
+
+});
+
+/*===========
+| delete
+================*/
+
+Route::get('/delete' , function(){
+//NOTE whenever we use find() we have to assign it to any variable so that that variable may have the valus whcih we want to affect .also delete is not static method
+    $post = Post::find(2);
+
+    $post->delete();
+
+});
+
+Route::get('/delete2' , function(){
+
+    // post::destroy(3);
+
+    post::destroy([4,5]);
+
+    //we can also use where conditions to delete specific data
+
+    //post::where('is_admin' ,1)->delete();
+
+});

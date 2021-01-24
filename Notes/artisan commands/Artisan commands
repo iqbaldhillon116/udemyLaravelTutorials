@@ -58,4 +58,20 @@ NOTE:To see all commands provided by php artisan we can write the following comm
 
  => php artisan make:controller --resource PostsController
 
+ 7.)How to create Model?
+
+=> php artisan make:model Post
+   or
+=> php artisan make:model Post -m
+    
+    here -m is used to do migration also after creating the model.
+
+    NOTE: *when we name our model Post ..it is by default pointing to the the table name posts and its primary key is id.
+
+    *if you want to point to any other table then add protected property $table and assign the string value to it of table name whatever you want to name it.
+
+    *also if you want to change the primary key default column than add protected property $primary and assign the column name.
+
+    *We can use elquent command only after creating model.because Model class has all the properties of eloquent.
+
 
