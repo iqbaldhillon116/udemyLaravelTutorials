@@ -82,4 +82,41 @@ OR
 =>  post::destroy(1);
 
 
+Q. How to do soft delete?
 
+1)firstly add namespace called softdeletes in model by follwing syntax,
+ use Illuminate\Database\Eloquent\softdeletes
+
+ and add following code inside class
+
+ use softdeletes;
+ protectd $dates =['deleted_at']; 
+
+ 2)now create migration for add column in post table . we are creating the column 'deleted_at' to store time_stamp of deletion row
+
+php artisan make:migration add_deleted_at_column_to_posts_tables  --table=posts
+
+
+3)after creating migration add methods to up and down funciton 
+ in up function write code 
+      $table->softdeletes();
+
+in down funciton write code 
+      $table->dropcolumn('deleted_at');
+
+4)use php artisan migrate command to migrate table column
+
+5)create route for hitting softdelete method
+
+Route::get('/softdelete',function(){
+   Post::find(1)->delete();
+});
+
+
+Q. How to restore deleted item?
+
+ Post::withtrashed()->where('id',1)->restore();
+
+Q. How to permanently delete trashed items?
+
+ Post::withtrashed()->where('id',1)->forceDelete();

@@ -258,3 +258,38 @@ Route::get('/delete2' , function(){
     //post::where('is_admin' ,1)->delete();
 
 });
+
+/*===========
+| Soft delete
+================*/
+
+Route::get('/softdelete',function(){
+
+        Post::find(6)->delete();
+
+});
+
+Route::get('/readsoftdelete',function(){
+
+//normal retrieve
+
+    // $post = post::find(1);
+    // return $post;
+
+//normal retrieve
+
+        $post = Post::withTrashed()->where('id',6)->get();
+            return $post;
+    });
+
+Route::get('/restore',function(){
+
+    Post::withTrashed()->where('is_admin',1)->restore();
+});
+
+
+Route::get('/forcedelete' , function(){
+    Post::withTrashed()->where('id',6)->forceDelete();
+
+    // Post::onlyTrashed()->forceDelete();
+});
