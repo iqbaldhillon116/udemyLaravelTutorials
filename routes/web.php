@@ -293,3 +293,19 @@ Route::get('/forcedelete' , function(){
 
     // Post::onlyTrashed()->forceDelete();
 });
+
+
+/*-------------------------------
+* section 11 : Eloquent relationships
+-------------------------------
+*/
+//dont forget to add posts model inside this file with use keyword 
+
+// use App\Post;
+use App\User;
+
+Route::get('/users/{id}/post',function($id){
+
+  return User::find($id)->posts;//here posts is table name and it can be chained with arow to pull the column data as ommented in next line
+ // User::find($id)->posts->title;
+});

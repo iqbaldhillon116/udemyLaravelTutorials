@@ -1,4 +1,4 @@
-NOTE: To use Elquent Commands in laravel you first have to create model and then we can access all the aelquent properties to access database.
+NOTE: To use Elquent Commands in laravel you first have to create model and then we can access all the eolquent properties to access database.
 We have defined the steps of how to create model in artisan commands.
 
 Q.How to read data from database with eloquent ?
@@ -8,7 +8,7 @@ Q.How to read data from database with eloquent ?
  use App\post;
 
 => $result = Post::all();
-   to fetech all data.
+   to fetch all data.
 
 => $result = Post::find(1);
 
