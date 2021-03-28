@@ -37,8 +37,30 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts(){
+    public function post(){
             //this function is for one to one relationship created in section 11 
         return $this->hasOne('App\Post');
     }
+
+    public function posts(){
+        //this funciton is used to return one to many relationships
+        return $this->hasMany('App\Post');
+
+    }
+
+    public function roles(){
+
+        return $this->belongsToMany('App\Role')->withPivot('created_at');
+
+        //to customize tables and columns
+
+        // return $this->belongsToMany('App\Role','user_role','user_id','role_id');
+    }
+
+
+    public function photos(){
+
+        return $this->morphMany('App\Photo','imageable');
+  
+      }
 }

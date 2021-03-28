@@ -301,11 +301,154 @@ Route::get('/forcedelete' , function(){
 */
 //dont forget to add posts model inside this file with use keyword 
 
-// use App\Post;
+//  use App\Post;
 use App\User;
 
+//one to one relation
 Route::get('/users/{id}/post',function($id){
 
-  return User::find($id)->posts;//here posts is table name and it can be chained with arow to pull the column data as ommented in next line
+  return User::find($id)->post;//here posts is table name and it can be chained with arow to pull the column data as ommented in next line
  // User::find($id)->posts->title;
 });
+
+//inverse relation
+Route::get('/post/{id}/user',function($id){
+
+    return Post::find($id)->user;//this is a reverse relationship 
+    //here we have used the post model to get the user info from posts
+});
+
+//one to many relation
+
+Route::get('/posts',function(){
+
+    $user = User::find(1);
+
+    foreach($user->posts as $posts){
+            echo $posts;
+    }
+
+});
+
+//many to many relationship
+use App\Role;
+Route::get('/user/role',function(){
+
+$user = User::find(2);//finding the role of the user
+
+// $user = User::find(2)->roles()->orderBy('id','desc')->get();
+foreach($user->roles as $user){
+        print_r($user->name);
+}
+
+
+});
+//  use App\User;
+//inverse of above method
+Route::get('/role/users',function(){
+
+    $role = Role::find(1);
+
+    foreach($role->users as $role){
+        print_r($role->name);
+    }
+
+});
+
+Route::get('/user/pivot',function(){
+
+    $user = User::find(1);
+
+    foreach($user->roles as $role){
+        print_r($role->pivot->created_at);
+    }
+
+});
+
+
+//accessing users country
+use App\Country;
+Route::get('/user/country',function(){
+    //here we are going to find the posts based on users living in that particular country
+
+    $country = Country::find(2);
+
+    foreach( $country->posts as $post){
+        return $post->title;
+
+    }
+
+});
+
+//fetching user photos with polymorphic relationship
+Route::get('/user/photos',function(){
+
+    $user = User::find(1);
+
+    foreach($user->photos as $photo){
+
+        return $photo->path;
+
+    }
+
+});
+//similarly fetching the post photos with polymorphic relationship
+Route::get('/post/photos',function(){
+
+    $post = Post::find(1);
+
+    foreach($post->photos as $photo){
+
+        return $photo->path;
+
+    }
+});
+
+//doing the inverse of polymorphic realtion i.e. getting the owner detail from photo
+use App\Photo;
+
+
+//here id is imageable_id that we are passing
+
+//imageable id represents the the id no. of that particular table primary key or we can say it foreign key to both tables.
+Route::get('/photo/{id}/photos',function($id){
+
+    $photo = Photo::findOrfail($id);
+    return $photo->imageable;
+        // foreach($photos as $photo ){
+               
+        // }   
+
+});
+
+
+//polymorphic relation many to many retrieving
+use App\Video;
+
+Route::get('/posts/tag',function(){
+
+    $posts = Post::find(1);//here we are finding the post and will pull out the type of tag  on it. 
+     return $posts;
+    // foreach($videos->tags as $tag){
+    //     return $tag->name;
+
+    // }
+});
+
+//in above funciton my tags model is not working that should fetch the tags through posts model so i have commented the foreach loop .otherwise the code is fine
+
+//retrieving the owner with many to many relationship
+use App\Tag;
+
+Route::get('tag/post',function(){
+
+    $tags = Tag::find(3);
+    
+    foreach($tags->posts as $post){
+
+        return $post->name;
+
+    }
+
+});
+//section 11 ends

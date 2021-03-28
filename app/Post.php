@@ -21,5 +21,22 @@ use SoftDeletes;
 
 Protected $dates = ['deleted_at'];
 
+    public function user(){
+    //this function is used to implement the reverse relationship with the help of belongsto function
+      return $this->belongsTo('App\User');
+    }
 
+
+    public function photos(){
+
+      return $this->morphMany('App\Photo','imageable');
+
+    }
+    //this function is used to use many to many relationships 
+    public function tags(){
+
+      return $this->morphToMany('App\Tag','taggable');
+    }
+
+    
 }
